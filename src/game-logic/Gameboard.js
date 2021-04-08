@@ -1,6 +1,8 @@
+import { Ship } from "./Ship"
 // we will have two gameboards one for player and one for AI
 class Gameboard {
   constructor() {
+    // grid keeps track of ships locations and misses
     this.grid = Array.from(Array(10), () => new Array(10));
     // keep array of ship references to track how many have been sank
     this.ships = [];
@@ -46,4 +48,16 @@ class Gameboard {
 }
 
 
-export { Gameboard }
+// create instance of gameboard with standard number of ships used to play
+const setUpGameboard = () => {
+  const gameboard = new Gameboard();
+  gameboard.addShip(new Ship(5, "Carrier"))
+  gameboard.addShip(new Ship(4, "Battleship"))
+  gameboard.addShip(new Ship(3, "Destroyer"))
+  gameboard.addShip(new Ship(3, "Submarine"))
+  gameboard.addShip(new Ship(2, "Patrol Boat"))
+  return gameboard;
+}
+
+
+export { Gameboard, setUpGameboard }

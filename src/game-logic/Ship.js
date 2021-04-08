@@ -5,13 +5,14 @@ class Ship {
     this.length = length;
     // array of objects recording ship location and hit status
     this.location = new Array(length).fill(null);
-    /*
-    locationObj = {
-      vertical: y,
-      horizontal: x,
-      isHit: true/false
-    }
-    */
+    // array will be filled with location objects (example below)
+      /*
+        locationObj = {
+          vertical: y,
+          horizontal: x,
+          isHit: true/false
+        }
+      */
     this.sank = false;
     this.name = name;
   }
