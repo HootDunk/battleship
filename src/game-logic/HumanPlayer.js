@@ -1,41 +1,29 @@
 import { setUpGameboard } from "./Gameboard"
 
 class HumanPlayer{
-  // type is either human or computer. Or will make a HumanPlayer and ComputerPlayer class. 
-  // computer class will store array of potential moves and information about prior moves to make informed decisions.
-  constructor(isTurn) {
+  constructor(isTurn, gameboard) {
     this.isTurn = isTurn;
     // would be better to add conditionals in gameboard constructor
-    this.gameboard = setUpGameboard();
+    this.gameboard = gameboard;
   }
 
   // players take turns by attacking enemy gameboard.
-  takeTurn (vertical, horizontal, enemyGB){
-    enemyGB.recieveAttack(vertical, horizontal);
+  takeTurn = (vertical, horizontal, enemyGB) =>{
+    enemyGB.receiveAttack(vertical, horizontal);
     this.isTurn = !this.isTurn;
   }
 }
 
 
-
-// Player stores reference to it's own gameboard, game progresses by attacking the other players gameboard.
-  // player1.isTurn? player1.gameboard.recieveAttack(coordinate) : computerPlayer.gameboard.recieveAttack(coordinate)
-// a function 
-
-
-// Classes
-  // Ship
-  // Gameboard
-  // Player and maybe CPU?
-  // Game?
-
 // Other modules
-  // DOM Interaction
+  // DOM Interaction (GameUI and supporting components)
 
-// display both players boards and render them using information from
-// the Gameboard class
+// Create class functions that retrieve copys of object state. 
+// game loop will use functions that wrap around object mutation.  We will
+// update the state by getting copys of the objects and updating state.
 
-// Gameboard should have info for most of the UI state it seems
-// who
+// TO DO
+  // Add in functions to retrive a deep copy of objects.
+  
 
 export default HumanPlayer;

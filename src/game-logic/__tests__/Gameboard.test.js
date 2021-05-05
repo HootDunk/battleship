@@ -48,7 +48,7 @@ test("recieveAttack records a hit on submarine at 0, 0", () => {
 })
 
 
-test("areAllSank returns false first and then true after we hit the other spots", () => {
+test("areAllSank returns false first and then true after we hit the remaining spots", () => {
   expect(gameboard.areAllSank()).toBe(false)
   gameboard.receiveAttack(1, 0);
   gameboard.receiveAttack(2, 0);

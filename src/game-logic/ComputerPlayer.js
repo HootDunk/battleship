@@ -1,10 +1,10 @@
 import { setUpGameboard } from "./Gameboard"
 
-
-const generatePossibleMoves = () => {
+// create list of all possible moves based on gameboard dimensions
+const listPossibleMoves = (gbLength, gbWidth) => {
   const moves = [];
-  for(let i = 0; i < 10; i++){
-    for (let j = 0; j < 10; j++){
+  for(let i = 0; i < gbLength; i++){
+    for (let j = 0; j < gbWidth; j++){
       moves.push({vertical: i, horizontal: j,})
     }
   }
@@ -13,13 +13,12 @@ const generatePossibleMoves = () => {
 
 
 class ComputerPlayer{
-  // type is either human or computer. Or will make a HumanPlayer and ComputerPlayer class. 
   // computer class will store array of potential moves and information about prior moves to make informed decisions.
-  constructor(isTurn) {
+  constructor(isTurn, gameboard) {
     this.isTurn = isTurn;
-    this.gameboard = setUpGameboard();
+    this.gameboard = gameboard;
     // create array of possible move objects
-    this.possibleMoves = generatePossibleMoves();
+    this.possibleMoves = listPossibleMoves(gameboard.grid.length, gameboard.grid[0].length);
   }
 
   getRandomCoordinate() {
@@ -37,7 +36,7 @@ class ComputerPlayer{
   takeTurn (enemyGB) {
     const coordinate = this.getRandomCoordinate();
     // attack enemy gameboard with coordinate given
-    enemyGB.recieveAttack(coordinate.vertical, coordinate.horizontal);
+    enemyGB.receiveAttack(coordinate.vertical, coordinate.horizontal);
 
     this.isTurn = !this.isTurn;
   }
@@ -45,12 +44,3 @@ class ComputerPlayer{
 
 export default ComputerPlayer;
 
-
-// need to add tests to computer player, and test human player
-  // may be easier to test the two together since the attack method
-  // relies on their being another player in the game.
-
-
-// will need to add some class fields and methods to create a smarter AI
-  // track last attack, twice prior attack, could be searching or attacking
-  // 

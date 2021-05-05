@@ -6,13 +6,13 @@ class Ship {
     // array of objects recording ship location and hit status
     this.location = new Array(length).fill(null);
     // array will be filled with location objects (example below)
-      /*
-        locationObj = {
-          vertical: y,
-          horizontal: x,
-          isHit: true/false
-        }
-      */
+        /*
+          locationObj = {
+            vertical: y,
+            horizontal: x,
+            isHit: true/false
+          }
+        */
     this.sank = false;
     this.name = name;
   }
@@ -31,6 +31,7 @@ class Ship {
   }
 
   // pass in array of coordinate objects to set ship location on gameboard
+  // setUpShip would be a better name as we don't just set it's location but also give an isHit key.
   setLocation(coordinates) {
     // update each coordinate object with isHit = false;
     let newLocation = coordinates.map(obj => {

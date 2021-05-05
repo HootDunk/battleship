@@ -1,13 +1,13 @@
-import { Ship } from "./Ship"
+
 // we will have two gameboards one for player and one for AI
 class Gameboard {
   constructor() {
     // grid keeps track of ships locations and misses
     this.grid = Array.from(Array(10), () => new Array(10));
-    // keep array of ship references to track how many have been sank
     this.ships = [];
     this.allShipsSank = false;
   }
+  
   // add reference to ship object at each given coordinate
   placeShip(ship, coordinates){
     coordinates.forEach(obj => {
@@ -16,18 +16,20 @@ class Gameboard {
     ship.setLocation(coordinates)
   }
 
-  receiveAttack(vertical, horizontal){
+  // need another con
+  receiveAttack = (vertical, horizontal) =>{
     // see if attack hit a ship
     if (this.grid[vertical][horizontal] === undefined){
       this.grid[vertical][horizontal] = "miss";
     }
-    // is not undefined, is not miss. therefore it is a ship
-    // call hit function on that ship
+    // objects are our references to ships, so it is a hit.
     else if (typeof this.grid[vertical][horizontal] === 'object'){
       let shipObj = this.grid[vertical][horizontal];
       shipObj.hit(vertical, horizontal);
     }
-    else console.log("move not allowed")
+    // return true/false from here to confirm if move was valid?
+    // need some way to properly alternate turns only when move was valid
+    else console.log("move not allowed/already attacked here")
   }
 
   areAllSank(){
@@ -58,6 +60,10 @@ const setUpGameboard = () => {
   gameboard.addShip(new Ship(2, "Patrol Boat"))
   return gameboard;
 }
+
+
+
+
 
 
 export { Gameboard, setUpGameboard }

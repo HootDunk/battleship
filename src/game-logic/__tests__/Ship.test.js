@@ -22,6 +22,7 @@ test("All ship coordinate objects have isHit value of false", () => {
     },
   ]
   ship.setLocation(coordinates);
+  console.log(ship)
   ship.location.forEach(obj => {
     expect(obj.isHit).toBe(false);
   })
@@ -32,7 +33,7 @@ test("Ship takes a hit at vertical: 0, horizontal: 0 and isHit at that location 
   expect(ship.location[0].isHit).toBe(true);
 })
 
-test("Ship takes hit at all spots. all isHit values = false", () => {
+test("Ship takes hit at all spots. all isHit values = true", () => {
   ship.hit(1, 0)
   ship.hit(2, 0)
   for(const obj of ship.location){
