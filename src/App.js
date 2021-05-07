@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
+import {Gameboard} from "./game-logic/gameboard";
+import GameboardComp from "./Components/Gameboard";
 import './App.css';
 
 function App() {
+  const [humanGrid, setHumanGrid] = useState(new Gameboard().grid);
+  const [computerGrid, setComputerGrid] = useState(new Gameboard().grid);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GameboardComp grid={humanGrid} />
+      {/* <GameboardComp grid={computerGrid} /> */}
     </div>
   );
 }
 
 export default App;
+
+
+// create plain objects and functions to operate on them in their own files
+// create other files to test these objects and the operations on them
