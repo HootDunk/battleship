@@ -3,6 +3,9 @@ function Ship(length, name) {
   this.length = length;
   this.name = name;
   this.location = new Array(length).fill(null);
+  // likely don't need to keep track of the ship location.
+  // Just need to record the number of times it's been hit and compare that to it's length to tell if it has been sunk.
+  // this will greatly simplify the code. 
   // array will be filled with location objects (example below)
       /*
         locationObj = {
