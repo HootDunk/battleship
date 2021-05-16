@@ -2,21 +2,36 @@
 // we will have two gameboards one for player and one for AI
 class Gameboard {
   constructor() {
-    // grid keeps track of ships locations and misses
+    // the actual gameboard, keeps track of ship locations and missed attacks
     this.grid = Array.from(Array(10), () => new Array(10));
     this.ships = [];
     this.allShipsSank = false;
   }
+
+  // get a deep copy of grid (doesn't deep copy the inner objects...)
+  get grid(){
+    const copy = [];
+    for (let i = 0; i < this.grid.length; i++){
+      const innerArray = [];
+      for (let j = 0; j < this.grid[i].length; j++){
+        innerArray.push(this.grid[i][j]);
+      }
+      copy.push(innerArray);
+    }
+  }
+
   
   // add reference to ship object at each given coordinate
   placeShip(ship, coordinates){
     coordinates.forEach(obj => {
       this.grid[obj.vertical][obj.horizontal] = ship;
     })
+    // consider pulling this out.
+    // have each segment of the ship record it's own location
     ship.setLocation(coordinates)
   }
 
-  // need another con
+
   receiveAttack = (vertical, horizontal) =>{
     // see if attack hit a ship
     if (this.grid[vertical][horizontal] === undefined){

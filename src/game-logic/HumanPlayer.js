@@ -3,7 +3,6 @@ import { setUpGameboard } from "./Gameboard"
 class HumanPlayer{
   constructor(isTurn, gameboard) {
     this.isTurn = isTurn;
-    // would be better to add conditionals in gameboard constructor
     this.gameboard = gameboard;
   }
 

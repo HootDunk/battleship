@@ -1,4 +1,3 @@
-import { setUpGameboard } from "./Gameboard"
 
 // create list of all possible moves based on gameboard dimensions
 const listPossibleMoves = (gbLength, gbWidth) => {
@@ -11,7 +10,7 @@ const listPossibleMoves = (gbLength, gbWidth) => {
   return moves;
 }
 
-
+// will need to create a function for the computer player to randomly assign locations for the ships
 class ComputerPlayer{
   // computer class will store array of potential moves and information about prior moves to make informed decisions.
   constructor(isTurn, gameboard) {
