@@ -32,11 +32,11 @@ const renderSquare = (cell, i, onDragOver, onDrop) => {
   else if (typeof cell === "string"){
     return (
       <Square 
-      key={i}
-      index={i}
-      onDragOver={onDragOver}
-      onDrop={onDrop}
-    >
+        key={i}
+        index={i}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+      >
       <ShipSection />
     </Square>
     )

@@ -31,23 +31,24 @@ const styles = {
 export default function StartMenu(props) {
 
   const onDragOver = (ev) => {
-    // need to preventDefault on drag events for drag and drop to work properly
-    // default is to not allow the drop event
+    // default is to not allow the drop event, prevent default on all droppable areas
     ev.preventDefault();
   }
 
-  // sets dataTransfer id
   const onDragStart = (ev, id) => {
-    console.log(ev)
-    console.log("drag start ", id)
     // every draggable element has a dataTransfer object which has the setData method to store our properties/parameters
-    // When a drop event happens we can use the getData method (in this case the id) which we can use to change the state of that item
+    // When a drop event happens we can use the getData method (in this case the id) to identify and change state based on the items id.
     ev.dataTransfer.setData("id", id);
   }
-
+  // I don't like this...
   const onDrop = (ev, target) => {
     let id = ev.dataTransfer.getData("id");
     props.placeShip(id, target)
+  }
+
+  const onDrop1 = (ev, target, cb) => {
+    let id = ev.dataTransfer.getData("id");
+    cb(id, target);
   }
 
   return (

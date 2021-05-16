@@ -3,15 +3,6 @@ import Gameboard from "./Components/Gameboard"
 import BoatMenu from "./Components/BoatMenu"
 import StartMenu from "./Components/StartMenu"
 
-
-// const styles={
-//   wrapper: {
-//     width: '100%',
-//     minHeight: "100vh",
-//     backgroundColor: "#212121",
-//   },
-// }
-
 const initialShips = [
   {
     name: "Battleship",
@@ -75,16 +66,20 @@ function App() {
       }
     })
   }
+  if (!ships.allPlaced){
+    return (
+      <div>
+        <StartMenu 
+          ships={ships} 
+          gameboard={gameboard}
+          placeShip={placeShip}
+        />
+      </div>
+    );
+  } else {
+    return <h1>Start the game</h1>
+  }
 
-  return (
-    <div>
-      <StartMenu 
-        ships={ships} 
-        gameboard={gameboard}
-        placeShip={placeShip}
-      />
-    </div>
-  );
 }
 
 export default App;

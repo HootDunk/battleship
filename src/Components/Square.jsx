@@ -18,3 +18,7 @@ export default function Square({children, onDragOver, onDrop, index}) {
     </div>
   )
 }
+
+
+// There simply has to be a way to re-work the square, gameboard, ships, etc... to work better.  Definitely search for improvements before continuing.
+// https://reactjs.org/docs/composition-vs-inheritance.html
