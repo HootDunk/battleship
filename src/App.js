@@ -39,16 +39,20 @@ function App() {
     arr: initialShips
   });
 
-  const placeShip = (shipName, location) => {
-    const ship = ships.arr.find(ship => ship.name === shipName);
+  const placeShip = (ev, dropIndex) => {
+    // console.log(ev)
+    let id = ev.dataTransfer.getData("id");
+    console.log(id);
+    console.log(dropIndex);
+    const ship = ships.arr.find(ship => ship.name === id);
     const boardCopy = [...gameboard]
     for(let i = 0; i < ship.length; i++){
-      if (i === 0) boardCopy[location] = ship.name;
+      if (i === 0) boardCopy[dropIndex] = ship.name;
       else {
         ship.orientation === 'vertical'? 
-          boardCopy[location + i * 10] = ship.name
+          boardCopy[dropIndex + i * 10] = ship.name
           :
-          boardCopy[location + i] = ship.name;
+          boardCopy[dropIndex + i] = ship.name;
       }
     }
     const shipCopy = {...ship}
@@ -66,6 +70,36 @@ function App() {
       }
     })
   }
+
+  // const placeShip = (shipName, location) => {
+    // const ship = ships.arr.find(ship => ship.name === shipName);
+    // const boardCopy = [...gameboard]
+    // for(let i = 0; i < ship.length; i++){
+    //   if (i === 0) boardCopy[location] = ship.name;
+    //   else {
+    //     ship.orientation === 'vertical'? 
+    //       boardCopy[location + i * 10] = ship.name
+    //       :
+    //       boardCopy[location + i] = ship.name;
+    //   }
+    // }
+    // const shipCopy = {...ship}
+    // shipCopy.isPlaced = true;
+
+    // const index = ships.arr.findIndex(obj => obj.name === ship.name);
+    // const shipsArrCopy = [...ships.arr]
+    // shipsArrCopy[index] = shipCopy;
+
+    // setGameboard(boardCopy)
+    // setShips(prevState => {
+    //   return {
+    //     ...prevState,
+    //     arr: shipsArrCopy,
+    //   }
+    // })
+  // }
+
+
   if (!ships.allPlaced){
     return (
       <div>

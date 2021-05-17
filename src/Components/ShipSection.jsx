@@ -10,9 +10,7 @@ const styles = {
 
 export default function ShipSection() {
   return (
-    <div 
-      style={styles}
-    >
-    </div>
+    <div style={styles} />
+
   )
 }

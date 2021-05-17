@@ -41,22 +41,27 @@ export default function StartMenu(props) {
     ev.dataTransfer.setData("id", id);
   }
   // I don't like this...
-  const onDrop = (ev, target) => {
-    let id = ev.dataTransfer.getData("id");
-    props.placeShip(id, target)
-  }
+  // const onDrop = (ev, target) => {
+  //   let id = ev.dataTransfer.getData("id");
+  //   props.placeShip(id, target)
+  // }
 
-  const onDrop1 = (ev, target, cb) => {
-    let id = ev.dataTransfer.getData("id");
-    cb(id, target);
-  }
+  /*
+    placeShip = (ev, target) => {
+      ev.dataTransfer.getData("id");
+      // Change state.
+    }
+  */
+
+  // onDrop -> set ship location in gameboard state. could get rid of the onDrop function entirely.
+  // 
 
   return (
     <div style={styles.wrapper}>
       <div style={styles.card}>
         <BoatMenu onDragStart={onDragStart} ships={props.ships} />
         <div style={styles.boardWrapper}>
-          <Gameboard onDrop={onDrop} onDragOver={onDragOver} gameboard={props.gameboard}/>
+          <Gameboard onDrop={props.placeShip} onDragOver={onDragOver} gameboard={props.gameboard}/>
         </div>
       </div>
     </div>

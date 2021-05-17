@@ -1,19 +1,16 @@
 import React from 'react'
 
+// make squares
 const styles = {
-  width: "10%",
-  height: "10%",
+  width: "100%",
+  height: "100%",
   outline: "2px solid #002c66"
 }
 
-export default function Square({children, onDragOver, onDrop, index}) {
+export default function Square({children}) {
 
   return (
-    <div
-      style={styles}
-      onDragOver={(e) => onDragOver(e)}
-      onDrop={(e) => onDrop(e, index)}
-    >
+    <div style={styles}>
       {children}
     </div>
   )
