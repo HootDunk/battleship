@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Square from "./Square"
 
 
@@ -8,17 +7,22 @@ const styles = {
   height: "100%",
 }
 
-export default function DroppableSquare({children, onDragOver, onDrop, dropIndex}) {
+export default function DroppableSquare({children, placeShip, dropIndex}) {
+
+  const handleDragOver = (ev) => {
+    // default is to not allow the drop event, prevent default on all droppable areas
+    ev.preventDefault();
+  }
+
   return (
     <div
       style={styles}
-      onDragOver={(e) => onDragOver(e)}
-      onDrop={(e) => onDrop(e, dropIndex)}
+      onDragOver={(e) => handleDragOver(e)}
+      onDrop={(e) => placeShip(e, dropIndex)}
     >
       <Square>
         {children}
       </Square>
-      
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Square from './Square'
+// import Square from './Square'
 import ShipSection from "./ShipSection"
 import DroppableSquare from "./DroppableSquare"
 const styles = {
@@ -11,21 +11,20 @@ const styles = {
   }
 }
 
-function BaseGB({gameboard}) {
+// function BaseGB({gameboard}) {
 
-}
+// }
 
 
-export default function Gameboard({gameboard, onDragOver, onDrop}) {
+export default function Gameboard({gameboard, placeShip}) {
   // if
-const renderSquare = (cell, i, onDragOver, onDrop) => {
+const renderSquare = (cell, i) => {
   if (cell === null){
     return (
       <div key={i} style={{width: '50px', height: '50px'}}>
         <DroppableSquare 
           dropIndex={i}
-          onDragOver={onDragOver}
-          onDrop={onDrop}
+          placeShip={placeShip}
         >
           {i}
         </DroppableSquare>
@@ -36,9 +35,7 @@ const renderSquare = (cell, i, onDragOver, onDrop) => {
   else if (typeof cell === "string"){
     return (
       <div key={i} style={{width: '50px', height: '50px'}}>
-
         <ShipSection />
-
       </div>
 
     )
@@ -46,7 +43,7 @@ const renderSquare = (cell, i, onDragOver, onDrop) => {
 }
   return (
     <div style={styles.boardWrapper}>
-      {gameboard.map((cell, i) => renderSquare(cell, i, onDragOver, onDrop))}
+      {gameboard.map((cell, i) => renderSquare(cell, i))}
     </div>
   )
 }
