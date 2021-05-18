@@ -1,24 +1,39 @@
 import React from 'react'
 import Ship from "./Ship"
 const styles = {
-  width: "400px",
-  height: "500px",
-  outline: "1px solid black",
-  display: 'flex',
-  flexDirection: "column",
-  alignItems: "center",
-
+  container: {
+    width: "400px",
+    height: "500px",
+    outline: "1px solid black",
+    display: 'flex',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  buttonDiv: {
+    width: '100%',
+  },
+  span: {
+    fontSize: "30px"
+  }
 }
 
 // will recieve ships prop
 // will render first unplaced ship
-export default function BoatMenu({ships, onDragStart}) {
+export default function BoatMenu({ships, changeOrientation}) {
   const currentShip = ships.arr.find(ship => !ship.isPlaced);
   if (!currentShip) return <h1>All ships placed</h1>
   return (
-    <div style={styles}>
+    <div style={styles.container}>
       <h1>Place Your {currentShip.name}</h1>
-      <Ship onDragStart={onDragStart} ship={currentShip} />
+      <Ship ship={currentShip} />
+      <div style={styles.buttonDiv}>
+        <button
+          onClick={() => changeOrientation(currentShip.name)}
+        >
+          Rotate Ship
+        </button>
+      </div>
     </div>
   )
 }
