@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
-// import Gameboard from "./Components/Gameboard"
+import Gameboard from "./Components/Gameboard"
 // import BoatMenu from "./Components/BoatMenu"
 import StartMenu from "./Components/StartMenu"
+import Background from "./Components/Background"
+import Game from "./Components/Game"
 
+import {generateShips} from "./game-logic/game-logic"
+// create object constructor and create factor that produces initialShips.  move to other file.
 const initialShips = [
   {
-    name: "Battleship",
+    name: "Carrier",
     length: 5,
+    orientation: "vertical",
+    isPlaced: false,
+    numHits: 0,
+    isSank: false,
+  },
+  {
+    name: "Battleship",
+    length: 4,
     orientation: 'vertical',
     isPlaced: false,
     numHits: 0,
@@ -14,6 +26,14 @@ const initialShips = [
   },
   {
     name: "Submarine",
+    length: 3,
+    orientation: 'vertical',
+    isPlaced: false,
+    numHits: 0,
+    isSank: false,
+  },
+  {
+    name: "Destroyer",
     length: 3,
     orientation: 'vertical',
     isPlaced: false,
@@ -33,10 +53,12 @@ const initialShips = [
 
 function App() {
   const [gameboard, setGameboard] = useState(new Array(100).fill(null));
+  // may move this down into game component
+  const [computerGB, setComputerGB] = useState(new Array(100).fill(null));
   const [ships, setShips] = useState({
     allPlaced: false,
     allSank: false,
-    arr: initialShips
+    arr: generateShips(),
   });
 
   const getShipDeepCopy = (id) => {
@@ -45,17 +67,27 @@ function App() {
   }
 
   // pass in updated ship and to inserted it into the array and set the state.
-  const updateShipArray = (ship) => {
+  const updateShipArray = (ship, allPlaced) => {
     const index = ships.arr.findIndex(obj => obj.name === ship.name);
     const shipsArrCopy = [...ships.arr]
     shipsArrCopy[index] = ship;
+    if (!allPlaced){
+      setShips(prevState => {
+        return {
+          ...prevState,
+          arr: shipsArrCopy,
+        }
+      })
+    } else {
+      setShips(prevState => {
+        return {
+          ...prevState,
+          allPlaced: true,
+          arr: shipsArrCopy,
+        }
+      })
+    }
 
-    setShips(prevState => {
-      return {
-        ...prevState,
-        arr: shipsArrCopy,
-      }
-    })
   }
   
   const changeOrientation = (id) => {
@@ -72,6 +104,7 @@ function App() {
     if (typeof board[position] === "string") return false;
     return true;
   }
+
 
   const placeShip = (ev, dropIndex) => {
     // retrieve data about ship
@@ -101,47 +134,40 @@ function App() {
       }
     }
     ship.isPlaced = true;
-    updateShipArray(ship);
-    setGameboard(boardCopy)
+    // last boat is patrol boat, once it is placed all boats are placed
+    ship.name === "Patrol Boat"? updateShipArray(ship, true) : updateShipArray(ship);
+    setGameboard(boardCopy);
   }
 
 
 
   if (!ships.allPlaced){
     return (
-      <div>
+      <Background>
         <StartMenu 
           ships={ships} 
           gameboard={gameboard}
           placeShip={placeShip}
           changeOrientation={changeOrientation}
         />
-      </div>
+      </Background>
     );
   } else {
-    return <h1>Start the game</h1>
+    return (
+      <Background>
+         <Game 
+            leftGB={
+              <Gameboard gameboard={gameboard}/>
+            }
+            rightGB={
+              <Gameboard gameboard={computerGB}/>
+            }
+          />
+      </Background>
+    )
   }
 
 }
 
 export default App;
 
-
-// add checks for placing ships within proper bounds
-// allow user to place ships horizontally
-// review code and simplify/decouple some of the methods
-
-
-
-// placeShip currently has a lot of logic for the drag and drop functionality
-// it would be nice to seperate the logic for the drag and drop and the logic
-// to change the state into seperate functions.
-// The drag and drop logic could be it's own function lower down and return
-// an array off coordinates for the ship to be placed.  If placement is valid,
-// the placeShip function gets called with the ship coordinates passed to it. 
-
-// We could also conditionally prevent.default this way.
-// As it stands, if part of the ship is off the board but
-// the mouse is in the board, the drag and drop indicator will say it's
-// valid even though it won't be allowed. Might be a lot of calculations
-// for every drag however.

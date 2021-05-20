@@ -1,12 +1,11 @@
 import React from 'react'
 import BoatMenu from "./BoatMenu"
 import Gameboard from "./Gameboard"
-
+import Card from "./Card"
 const styles = {
   wrapper: {
-    width: '100%',
-    minHeight: "100vh",
-    backgroundColor: "#212121",
+    height: "100vh",
+    width: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -17,13 +16,11 @@ const styles = {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#262626",
-    borderRadius: "5px",
-    boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
   },
   boardWrapper: {
     width: "500px",
     height: "500px",
+    boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
   }
   
 }
@@ -32,13 +29,12 @@ export default function StartMenu(props) {
 
   return (
     <div style={styles.wrapper}>
-      <div style={styles.card}>
+      <Card styles={styles.card}>
         <BoatMenu ships={props.ships} changeOrientation={props.changeOrientation} />
         <div style={styles.boardWrapper}>
           <Gameboard placeShip={props.placeShip} gameboard={props.gameboard}/>
         </div>
-      </div>
+      </Card>
     </div>
-
   )
 }

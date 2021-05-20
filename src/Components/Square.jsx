@@ -15,10 +15,3 @@ export default function Square({children}) {
     </div>
   )
 }
-
-
-// or add a droppable prop to the square to make it droppable or not.
-
-
-// There simply has to be a way to re-work the square, gameboard, ships, etc... to work better.  Definitely search for improvements before continuing.
-// https://reactjs.org/docs/composition-vs-inheritance.html

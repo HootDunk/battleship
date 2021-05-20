@@ -14,7 +14,7 @@ const styles = {
 // function BaseGB({gameboard}) {
 
 // }
-
+// gameboard can be droppable, or clickable, each with different square components
 
 export default function Gameboard({gameboard, placeShip}) {
   // if
